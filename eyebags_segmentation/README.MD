@@ -16,18 +16,40 @@
   
 3 数据处理
 
-  写了一个脚本txt_converter.py，将数据和眼袋关键点的标签整合到一个txt中去，每行先给出图片的路径，再给出该图片对应关键点的坐标（一共10组），用逗号分隔。
-  因为每张图片有三个标注，因此需要读取三个标注文件，将其坐标取平均后再输出到txt文件中去。
+  写了一个脚本txt_converter.py，将数据和眼袋关键点的标签整合到一个txt中去，每行先给出图片的路径，再给出该图片对应关键点的坐标（一共10组），用逗号分隔。因为每张图片有三个标注，因此需要读取三个标注文件，将其坐标取平均后再输出到txt文件中去。
   
   同时，除了眼袋的关键点，项目还需要用到人脸关键点。使用开源的人脸关键点检测库dlib进行人脸关键点的提取。在服务器上安装dlib-with-cuda的过程如下：
   
   git clone https://github.com/davisking/dlib.git
+  
   cd dlib
   
   mkdir build
+  
   cd build
+  
   cmake .. -DDLIB_USE_CUDA=1 -DUSE_AVX_INSTRUCTIONS=1
+  
   cmake --build .
+  
   cd ..
+  
   python setup.py install --yes USE_AVX_INSTRUCTIONS --yes DLIB_USE_CUDA
   
+  在编译过程中，系统提示找不到cudnn
+  
+  但服务器上已经装了cudnn，因此需要手动设定路径
+
+  在bashrc中加入path和动态库path：
+  
+  export LD_LIBRARY_PATH="/cm/shared/apps/cudnn/6.0/lib64:$LD_LIBRARY_PATH"
+  
+  export PATH="/cm/shared/apps/cudnn/6.0/include:$PATH"
+  
+  在python命令行下键入以下代码可用于测试是否安装成功：
+
+  import dlib
+
+  dlib.DLIB_USE_CUDA
+
+  如果输入为True，则说明gpu加载成功。
