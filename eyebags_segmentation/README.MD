@@ -8,7 +8,7 @@
 
   首先编写一个标签可视化工具label_visualization_tool.py，读取labelme生成的json文件，将关键点plot在对应的图片上。可以直观方便地逐张查看标注效果。
   
-    然后编写了两个自动检错脚本check_file_nums.py和check_point_nums.py，前者可自动检测每个id的20张图片是否都被标注，如果标注的图片少于20张，则报错。后者可自动检测每个标注文件的关键点数量是否正好为10个，多标或少标都报错。
+  然后编写了两个自动检错脚本check_file_nums.py和check_point_nums.py，前者可自动检测每个id的20张图片是否都被标注，如果标注的图片少于20张，则报错。后者可自动检测每个标注文件的关键点数量是否正好为10个，多标或少标都报错。
   
   然后将有错的图片重新进行手动标注，覆盖原先错误的标注文件。
   
@@ -20,21 +20,14 @@
   
   同时，除了眼袋的关键点，项目还需要用到人脸关键点。使用开源的人脸关键点检测库dlib进行人脸关键点的提取。在服务器上安装dlib-with-cuda的过程如下：
   
-  git clone https://github.com/davisking/dlib.git
-  
-  cd dlib
-  
-  mkdir build
-  
-  cd build
-  
-  cmake .. -DDLIB_USE_CUDA=1 -DUSE_AVX_INSTRUCTIONS=1
-  
-  cmake --build .
-  
-  cd ..
-  
-  python setup.py install --yes USE_AVX_INSTRUCTIONS --yes DLIB_USE_CUDA
+    git clone https://github.com/davisking/dlib.git
+    cd dlib
+    mkdir build
+    cd build
+    cmake .. -DDLIB_USE_CUDA=1 -DUSE_AVX_INSTRUCTIONS=1
+    cmake --build .
+    cd ..
+    python setup.py install --yes USE_AVX_INSTRUCTIONS --yes DLIB_USE_CUDA
   
   在编译过程中，系统提示找不到cudnn
   
@@ -42,14 +35,14 @@
 
   在bashrc中加入path和动态库path：
   
-  export LD_LIBRARY_PATH="/cm/shared/apps/cudnn/6.0/lib64:$LD_LIBRARY_PATH"
-  
-  export PATH="/cm/shared/apps/cudnn/6.0/include:$PATH"
+    export LD_LIBRARY_PATH="/cm/shared/apps/cudnn/6.0/lib64:$LD_LIBRARY_PATH"
+
+    export PATH="/cm/shared/apps/cudnn/6.0/include:$PATH"
   
   在python命令行下键入以下代码可用于测试是否安装成功：
 
-  import dlib
+    import dlib
 
-  dlib.DLIB_USE_CUDA
+    dlib.DLIB_USE_CUDA
 
   如果输入为True，则说明gpu加载成功。
