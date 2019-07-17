@@ -51,8 +51,8 @@
 
     dlib.DLIB_USE_CUDA
 
-  如果输入为True，则说明gpu加载成功。
+  如果输出为True，则说明gpu加载成功。
 
-  编写程序face_keypoint.py，对数据集中所有人脸图片进行关键点提取，将提取结果保存到txt文件中去。
+  编写程序face_keypoint.py，使用dlib对数据集中所有人脸图片进行关键点提取，将提取结果保存到txt文件中去。
   
   
