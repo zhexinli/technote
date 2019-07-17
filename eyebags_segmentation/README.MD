@@ -15,14 +15,25 @@
   数据集和标签是分开存储的，但是在清理过程中有时会在数据集中不小心添加进一些json文件并且忘记删除，于是写了一个脚本find_json.py便于剔除数据集中误加的json文件。
   
 3 数据处理
-  写了一个脚本txt_converter.py，将数据和眼袋关键点的标签整合到一个txt中去，每行先给出图片的路径，再给出该图片对应关键点的坐标（一共10组），用逗号分隔。因为每张图片有三个标注，因此需要读取三个标注文件，将其坐标取平均后再输出到txt文件中去。
+
+  写了一个脚本txt_converter.py，将数据和眼袋关键点的标签整合到一个txt中去，每行先给出图片的路径，再给出该图片对应关键点的坐标（一共10组），用逗号分隔。
+  因为每张图片有三个标注，因此需要读取三个标注文件，将其坐标取平均后再输出到txt文件中去。
+  
   同时，除了眼袋的关键点，项目还需要用到人脸关键点。使用开源的人脸关键点检测库dlib进行人脸关键点的提取。在服务器上安装dlib-with-cuda的过程如下：
+  
   git clone https://github.com/davisking/dlib.git
+  
   cd dlib
+  
   mkdir build
+  
   cd build
+  
   cmake .. -DDLIB_USE_CUDA=1 -DUSE_AVX_INSTRUCTIONS=1
+  
   cmake --build .
+  
   cd ..
+  
   python setup.py install --yes USE_AVX_INSTRUCTIONS --yes DLIB_USE_CUDA
   
