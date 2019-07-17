@@ -22,18 +22,11 @@
   同时，除了眼袋的关键点，项目还需要用到人脸关键点。使用开源的人脸关键点检测库dlib进行人脸关键点的提取。在服务器上安装dlib-with-cuda的过程如下：
   
   git clone https://github.com/davisking/dlib.git
-  
   cd dlib
-  
   mkdir build
-  
   cd build
-  
   cmake .. -DDLIB_USE_CUDA=1 -DUSE_AVX_INSTRUCTIONS=1
-  
   cmake --build .
-  
   cd ..
-  
   python setup.py install --yes USE_AVX_INSTRUCTIONS --yes DLIB_USE_CUDA
   
