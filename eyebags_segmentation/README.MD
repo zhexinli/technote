@@ -18,7 +18,7 @@
 
   写了一个脚本txt_converter.py，将数据和眼袋关键点的标签整合到一个txt中去，每行先给出图片的路径，再给出该图片对应关键点的坐标（一共10组），用逗号分隔。因为每张图片有三个标注，因此需要读取三个标注文件，将其坐标取平均后再输出到txt文件中去。
   
-  遇到问题：
+  遇到的问题：
   
   1.在读取某些标签文件的时候，程序报错“无法解析gbk”。
   
@@ -37,9 +37,11 @@
     cd ..
     python setup.py install --yes USE_AVX_INSTRUCTIONS --yes DLIB_USE_CUDA
   
-  在编译过程中，系统提示找不到cudnn。但服务器上已经装了cudnn，因此需要手动设定路径。
-
-  在bashrc中加入path和动态库path：
+  遇到的问题：
+  
+  1.在编译过程中，系统提示找不到cudnn。但服务器上已经装了cudnn。
+  
+  解决方法：手动设定路径。在bashrc中加入path和动态库path：
   
     export LD_LIBRARY_PATH="/cm/shared/apps/cudnn/6.0/lib64:$LD_LIBRARY_PATH"
 
